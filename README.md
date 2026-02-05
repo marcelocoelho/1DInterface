@@ -10,11 +10,17 @@ A 1D Interface is a graphical user interface made from a single row of pixels an
 
 Its simplicity provides a great platform for learning some of the fundamental ideas behind interface design.
 
+A few rules to keep in mind:
+  * Pixels can be squares or circles
+  * They can be arranged as a single row, column, or even a ring
+  * Pixels cannot move their x,y position and can only change color
+  * You cannot stack two or more lines of pixels together (that would make it a 2D interface)
+
 # Instructions Github
 
-1. Create a Github account
+1. Create a Github account: https://github.com/ (use your MIT email or add it to an existing github account so you can apply for their education program: https://github.com/education)
 2. Download the Github desktop app: https://desktop.github.com/download/
-3. Fork this repo
+3. Fork this repo (Don't just simply download it)
 
 # Instructions Coding
 
@@ -43,8 +49,7 @@ Users naturally create a physical map in their mind of where interface elements 
 
 ### Relationships
 
-A consistent use of form and colors is a great to way to establish a strong relationships between elements in an interface.
-For example, when the red player wins, the screen is filled with the color red.
+A consistent use of form and colors is a great to way to establish a strong relationships between elements in an interface. For example, when the red player wins, the screen is filled with the color red. A joystick with a red button would make it clear that this controls the red player.
 
 ### States
 
@@ -59,11 +64,15 @@ The 1D Interface app separates:
 2. The game structure (playing, score keeping, etc) from...
 3. The particularies of the hardware you are using (keyboard vs. joystick, display vs. LED strip).
 
-This makes it easier to prototype an interaction using your computer and then slowly add a custom joystick and a custom display.
+This makes it easier to prototype an interaction using your computer and then slowly add a custom joystick or a custom display.
 
 ## Logic
 
-Every element in the game is an Object which encapsulates core data and provides some internal functionalities. Here are the main ones:
+Every element in the game is an 'object' which encapsulates core data and provides some internal functionalities. 
+
+If you are unclear on how object oriented programming works, make sure to watch this video: https://youtu.be/T-HGdc8L-7w?si=LXGAMlUwLKVKvWqb
+
+Here are the main ones:
 
 **Player**
 Creates the main game components: players and target. Players can move when the user performs an action on keyboard and keep track of their own score and position. Targets show up in random places and wait to be caught by the Player. When a Player occupies the same pixel as the Target, it gains a point.
