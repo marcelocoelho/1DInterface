@@ -64,11 +64,15 @@ class RandomBezier {
       return { x: xCoeffs, y: yCoeffs };
     }
 
+    getDerivative(t) {
+      const { x, y } = this.polyRep;
+      return { dx: x[1] + 2*x[2]*t + 3*x[3]*t**2, dy: y[1] + 2*y[2]*t + 3*y[3]*t**2 };
+    }
+
     // how fast tangent changes wrt arc length
     getCurvature(t) {
       const { x, y } = this.polyRep;
-      const dx = x[1] + 2*x[2]*t + 3*x[3]*t**2;
-      const dy = y[1] + 2*y[2]*t + 3*y[3]*t**2;
+      const { dx, dy } = this.getDerivative(t);
       const d2x = 2*x[2] + 6*x[3]*t;
       const d2y = 2*y[2] + 6*y[3]*t;
       return 1000 * Math.abs(dx*d2y - dy*d2x) / (dx**2 + dy**2)**1.5;
@@ -154,11 +158,11 @@ class Track {
     show() {
       this.beziers.forEach(bezier => bezier.show());
 
-      fill('black');
-      noStroke();
-      textSize(12);
-      text('min κ: ' + this.minCurvature.toFixed(4), 10, 20);
-      text('max κ: ' + this.maxCurvature.toFixed(4), 10, 36);
+      // fill('black');
+      // noStroke();
+      // textSize(12);
+      // text('min κ: ' + this.minCurvature.toFixed(4), 10, 20);
+      // text('max κ: ' + this.maxCurvature.toFixed(4), 10, 36);
     }
 
     getPointAt(t) {
@@ -173,7 +177,10 @@ class Track {
 
       const curvature = b.getCurvature(localT);
 
-      return { x, y, curvature };
+      const { dx, dy } = b.getDerivative(localT);
+      const tLen = Math.sqrt(dx**2 + dy**2);
+
+      return { x, y, curvature, tx: dx/tLen, ty: dy/tLen };
     }
 
 }
@@ -206,34 +213,6 @@ class Display {
       for(let i = 0; i < displaySize; i++) { 
         display.setPixel(i, _color); 
       }
-    }
-
-    getEllipsePath(sampleNum=500) {
-      const ellipsePath = []
-      const cx = width / 2
-      const cy = height / 2
-      const a = (width * 4 / 10) - this.pixelSize
-      const b = (height / 10) - this.pixelSize
-      for (let i = 0; i < sampleNum; i++) {
-        const t = (TWO_PI / sampleNum) * i
-        const x = cx + a * cos(t)
-        const y = cy + b * sin(t)
-        ellipsePath.push([x, y])
-      }
-      return ellipsePath
-    }
-
-    samplePointsAroundCircle(r, sampleNum) {
-      const samplePoints = []
-      const cx = width / 2
-      const cy = height / 2
-      for (let i = 0; i < sampleNum; i++) {
-          const t = (TWO_PI / sampleNum) * i
-          const x = cx + r * cos(t)
-          const y = cy + r * sin(t)
-          samplePoints.push([x, y])
-        }
-      return samplePoints
     }
 
 
