@@ -134,4 +134,14 @@ function keyPressed() {
     if (key == 'R' || key == 'r') {
     controller.gameState = "PLAY";
     }
+
+    // // input1: click to accelerate / decelerate
+    // if (keyCode === UP_ARROW) {
+    //   car.speed += 0.002;
+    // }
+    // if (keyCode === DOWN_ARROW) {
+    //   car.speed -= 0.002;
+    // }
+
+    // 2: hold to accelerate / decelerate
   }
