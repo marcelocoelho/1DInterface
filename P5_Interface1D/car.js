@@ -22,19 +22,18 @@ class Car {
         }
 
         // // input2: hold to accelerate, release to stop
-        // if (keyIsDown(UP_ARROW)) {
+        // if (keyIsDown(87)) {
         //     this.speed += 0.0005;
-        // } else if (keyIsDown(DOWN_ARROW)) {
+        // } else if (keyIsDown(83)) {
         //     this.speed -= 0.0005;
         // } else {
         //     this.speed = 0;
         // }
 
         // input1: click to accelerate / decelerate
-        if (keyCode === UP_ARROW) {
+        if (key == 'w') {
           car.speed += 0.00005;
-        }
-        if (keyCode === DOWN_ARROW) {
+        } else if (key === 's') {
             // A: dont go backwards, just stop
             if (car.speed > 0) {
                 car.speed -= 0.00005;
@@ -65,7 +64,7 @@ class Car {
     }
 
     show() {
-        fill('blue');
+        fill('green');
         noStroke();
         if (this.dead) {
             circle(this.deadX, this.deadY, 15);

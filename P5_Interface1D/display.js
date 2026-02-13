@@ -81,7 +81,7 @@ class RandomBezier {
     show() {
       noFill();
       stroke('black')
-      strokeWeight(5)
+      strokeWeight(20)
       bezier(this.x1, this.y1, this.cpx1, this.cpy1, this.cpx2, this.cpy2, this.x2, this.y2);
     }
 
